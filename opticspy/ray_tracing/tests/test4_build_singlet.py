@@ -1,6 +1,6 @@
 
 import lens, trace, cal_tools
-import matplotlib.pyplot as __plt__
+import matplotlib.pyplot as plt
 New_Lens = lens.Lens(lens_name='singlet',creator='XF')
 New_Lens.add_surface(number=1,radius=10000000,thickness=10,glass='air')
 New_Lens.add_surface(number=2,radius=50,thickness=5,glass='BK7_SCHOTT',STO=True)
@@ -22,9 +22,9 @@ for ray in ray_list:
 	y2.append(ray.Pos[1])
 	z2.append(ray.Pos[2])
 
-fig = __plt__.figure()
-__plt__.plot(x2,y2,'bo')
-__plt__.show()
+fig = plt.figure()
+plt.plot(x2,y2,'bo')
+plt.show()
 
 rms = cal_tools.rms(ray_list)
 print rms

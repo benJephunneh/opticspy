@@ -1,15 +1,15 @@
-import numpy as __np__
-from unwrap import unwrap as __unwrap__
+import numpy as np
+from unwrap import unwrap as unwrap
 
-v = lambda x: __np__.arctan2(__np__.sin(x), __np__.cos(x))
-wrap_diff = lambda x: v(__np__.diff(x))
+v = lambda x: np.arctan2(np.sin(x), np.cos(x))
+wrap_diff = lambda x: v(np.diff(x))
 
 #Depth first search algorithm, use to find phase map(where)
 def DFS(M,ph1,m,n,s):
 	stack = []
 	stack.append([m,n])
 	M[m,n] = 2
-	ph = __np__.zeros([s,s])
+	ph = np.zeros([s,s])
 
 	while (len(stack) != 0):
 		[m,n] = stack[-1]
@@ -59,7 +59,7 @@ def unwrap1D(x):
 	for i in range(len(x) - 1):
 		i = i + 1
 		y[i] = y[i - 1] + diff[i - 1]
-	return __np__.array(y)
+	return np.array(y)
 
 def unwrap2D(wraped_phase,type="boundary",noise = True):
 	"""
@@ -83,14 +83,14 @@ def unwrap2D(wraped_phase,type="boundary",noise = True):
 	if type == "simple" and noise == False:
 		l = len(wraped_phase)
 		b = []
-		b = __np__.array(b)
+		b = np.array(b)
 		for i in range(l):
 			if i%2 == 0:
-				b = __np__.append(b,wraped_phase[i])
+				b = np.append(b,wraped_phase[i])
 			else:
-				b = __np__.append(b,wraped_phase[i][::-1])
+				b = np.append(b,wraped_phase[i][::-1])
 		ph1 = unwrap1D(b)
-		ph = __np__.zeros([l,l])
+		ph = np.zeros([l,l])
 		for i in range(l):
 			if i%2 == 0:
 				ph[i] = ph1[0:l]
@@ -104,7 +104,7 @@ def unwrap2D(wraped_phase,type="boundary",noise = True):
 		ph1 = wraped_phase[0]
 		M = wraped_phase[1]
 		s = wraped_phase[2]
-		start_pixel = __np__.where(M == 1)
+		start_pixel = np.where(M == 1)
 		m = start_pixel[0][0]
 		n = start_pixel[1][0]
 		print("start pixel",m,n)
@@ -115,7 +115,7 @@ def unwrap2D(wraped_phase,type="boundary",noise = True):
 		ph1 = wraped_phase[0]
 		M = wraped_phase[1]
 		s = wraped_phase[2]
-		ph = __unwrap__(ph1,wrap_around_axis_0=False,\
+		ph = unwrap(ph1,wrap_around_axis_0=False,\
 							wrap_around_axis_1=False,\
 							wrap_around_axis_2=False)
 		return ph

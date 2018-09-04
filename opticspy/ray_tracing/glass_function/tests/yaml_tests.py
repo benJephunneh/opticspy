@@ -16,7 +16,8 @@
 #
 #   Copyright 2014-2015 Pavel Dmitriev <pavel.a.dmitriev@gmail.com>
 
-from pytmm.refractiveIndex import *
+#from pytmm.refractiveIndex import *
+import pytmm.refractiveIndex
 
 # catalog = RefractiveIndex("../RefractiveIndex")
 catalog = RefractiveIndex()

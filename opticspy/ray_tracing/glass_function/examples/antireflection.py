@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pytmm.transferMatrix import *
+#from pytmm.transferMatrix import *
+import pytmm.transferMatrix
 
 n1 = 1.5
 n2 = np.sqrt(n1)

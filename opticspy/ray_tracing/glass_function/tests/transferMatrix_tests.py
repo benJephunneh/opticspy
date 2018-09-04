@@ -18,8 +18,10 @@
 
 import matplotlib.pyplot as plt
 
-from pytmm.transferMatrix import *
-from refractiveIndex import *
+#from pytmm.transferMatrix import *
+#from refractiveIndex import *
+import pytmm.transferMatrix
+import refractiveIndex
 
 catalog = RefractiveIndex()
 si = catalog.getMaterial('main', 'Si', 'Aspnes')

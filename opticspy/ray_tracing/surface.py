@@ -1,6 +1,6 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 from . import glass_funcs
 
 # Ray Class
@@ -9,7 +9,7 @@ class Surface(object):
     '''
     Surface Class
     '''
-    def __init__(self,wavelength_list,number,radius,thickness,glass,STO,__diameter__):
+    def __init__(self,wavelength_list,number,radius,thickness,glass,STO,diameter):
         self.wavelength_list = wavelength_list
         self.number = number
         self.radius = radius
@@ -17,7 +17,7 @@ class Surface(object):
         self.indexlist = glass_funcs.glass2indexlist(wavelength_list,glass)
         self.thickness = thickness
         self.STO = STO
-        self.__diameter__ = __diameter__
+        self.diameter = diameter
     def list(self):
         print('self_number',self.number)
         print(self.radius,self.thickness,self.indexlist)
@@ -46,7 +46,7 @@ def add(self,number,radius,thickness,glass,STO,output):
         print('Add surface: ',str(number))
     New_Surface = Surface(wavelength_list = self.wavelength_list,number=number,\
                             radius=radius,thickness=thickness,glass=glass,STO=STO,\
-                            __diameter__=0)
+                            diameter=0)
     self.surface_list.append(New_Surface)
 
 def outputjudge(number):

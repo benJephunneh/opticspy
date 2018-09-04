@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pytmm.transferMatrix import *
+#from pytmm.transferMatrix import *
+import pytmm.transferMatrix
 
 n = 2
 d = 600  # slab thickness, nm

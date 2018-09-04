@@ -1,4 +1,4 @@
-from __future__ import division as __division__
+from __future__ import division as division
 import matplotlib.pyplot as plt
 from matplotlib.path import Path
 import matplotlib.patches as patches
@@ -75,8 +75,8 @@ def draw_system(Lens):
     for unit_list in label_list1:
         max_d = 0
         for s_index in unit_list:
-            if surface_list[s_index].__diameter__ >= max_d:
-                max_d = surface_list[s_index].__diameter__
+            if surface_list[s_index].diameter >= max_d:
+                max_d = surface_list[s_index].diameter
         max_diameter_list.append(max_d)
 
     k = -1
@@ -98,7 +98,7 @@ def draw_system(Lens):
         glass = surface_list[num].glass
         t = surface_list[num].thickness
         thinkness_list.append(t)
-        d1 = surface_list[num].__diameter__
+        d1 = surface_list[num].diameter
         d2 = draw_diameter_list[num]
 
         if num == 0:

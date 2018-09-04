@@ -1,6 +1,6 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 from . import field,first_order_tools,surface
 from . import output_tools
 
@@ -147,14 +147,14 @@ def trace_draw_ray(Lens):
         diameter_list.append(tmp2)
     #print '============================================'
     D = []
-    diameter_list = __np__.asarray(diameter_list)
-    diameter_list = __np__.transpose(diameter_list)
+    diameter_list = np.asarray(diameter_list)
+    diameter_list = np.transpose(diameter_list)
     for i in diameter_list:
         #print i
         D.append(max(i)*2)
 
     for (surface,d) in zip(Lens.surface_list,D):
-        surface.__diameter__ = d*1.1
+        surface.diameter = d*1.1
     return ab_ray_list
 
 
@@ -196,9 +196,9 @@ def trace_one_ray(Lens,field_num,wave_num,ray,start=0,end=0,output=False,output_
     Pos_x = Lens.EPD/2 * ray[0]    # not general enough, now only could trace y angle ray
                                    # not really need to be traced?
                                    # need to think
-    Pos_y = -(Pos_z + EP)*__np__.tan(angle/180*__np__.pi) + Lens.EPD/2 * ray[1]
-    l = __np__.sin(angle/180*__np__.pi)
-    m = __np__.cos(angle/180*__np__.pi)
+    Pos_y = -(Pos_z + EP)*np.tan(angle/180*np.pi) + Lens.EPD/2 * ray[1]
+    l = np.sin(angle/180*np.pi)
+    m = np.cos(angle/180*np.pi)
     Pos = [Pos_x,Pos_y,0]
     KLM = [0,l,m]
     Ray_1 = field.Ray(Pos,KLM)
@@ -237,7 +237,7 @@ def traceray(ray_list, surface1, surface2, wave_num):
         n2 = surface2.indexlist[wave_num-1]
         tn1 = surface1.thickness
         tn2 = surface2.thickness
-        xyz = __np__.asarray([Pos[0], Pos[1], Pos[2] - tn1])
+        xyz = np.asarray([Pos[0], Pos[1], Pos[2] - tn1])
         #print 'xyz',xyz
         delta, cosI = pos(xyz, KLM, c2)
         Pos_new = xyz + delta * KLM
@@ -248,11 +248,11 @@ def traceray(ray_list, surface1, surface2, wave_num):
         if c2 == 0:
             KLM_new = KLM
         else:
-            sigma = __np__.sqrt(n2 ** 2 - n1 ** 2 * (1 - cosI ** 2)) - n1 * cosI
+            sigma = np.sqrt(n2 ** 2 - n1 ** 2 * (1 - cosI ** 2)) - n1 * cosI
             Kp = (n1 * KLM[0] - c2 * sigma * Pos_new[0]) / n2
             Lp = (n1 * KLM[1] - c2 * sigma * Pos_new[1]) / n2
             Mp = (n1 * KLM[2] - c2 * sigma * Pos_new[2] + sigma) / n2
-            KLM_new = __np__.asarray([Kp, Lp, Mp])
+            KLM_new = np.asarray([Kp, Lp, Mp])
         KLM_new_list.append(KLM_new)
 
     for Pos,KLM in zip(Pos_new_list,KLM_new_list):
@@ -274,8 +274,8 @@ def pos(Pos, KLM, curvature):
     M = KLM[2]
     E = c * (x0 ** 2 + y0 ** 2 + z0 ** 2) - 2 * z0
     G = M - c * (K * x0 + L * y0 + M * z0)
-    delta = E / (G + __np__.sqrt(G ** 2 - c * E))
-    cosI = __np__.sqrt(G ** 2 - c * E)
+    delta = E / (G + np.sqrt(G ** 2 - c * E))
+    cosI = np.sqrt(G ** 2 - c * E)
     return delta, cosI
 
 def ray2dict(ray_tracing):

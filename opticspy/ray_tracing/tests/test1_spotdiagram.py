@@ -1,6 +1,6 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import field
 import traceray
@@ -10,7 +10,7 @@ import cal_tools
 		
 
 # define rays
-l1 = __np__.linspace(-5,5,10)
+l1 = np.linspace(-5,5,10)
 Pos1 = []
 for i in l1:
 	for j in l1:
@@ -43,13 +43,13 @@ for i in Pos_new_list:
 	y.append(i[1])
 	z.append(i[2])
 	
-fig = __plt__.figure()
+fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x, z, y)
 ax.set_xlim3d(-6, 6)
 ax.set_ylim3d(-6, 6)
 ax.set_zlim3d(-6, 6)
-__plt__.show()
+plt.show()
 
 
 for pos,klm in zip(Pos_new_list,KLM_new_list):
@@ -67,9 +67,9 @@ for i in Pos_new_list1:
 	y2.append(i[1])
 	z2.append(i[2])
 
-fig = __plt__.figure()
-__plt__.plot(x2,y2,'b*')
-__plt__.show()
+fig = plt.figure()
+plt.plot(x2,y2,'b*')
+plt.show()
 
 
 

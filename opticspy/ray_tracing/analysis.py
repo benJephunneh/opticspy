@@ -1,6 +1,6 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 from . import cal_tools,trace
 # All analysis functions
 
@@ -20,23 +20,23 @@ def spotdiagram(Lens,field_plot,wave_plot,n=12,grid_type='grid'):
     marker_list = ['s','o','^','*','D','x','1','s']
     c_list = ['b','g','r','c','m','y','k','w']
 
-    fig = __plt__.figure(2,figsize=(5, 9), dpi=80)
+    fig = plt.figure(2,figsize=(5, 9), dpi=80)
     fig.canvas.set_window_title('Spotdiagram')
     fig.suptitle("Spotdiagram", fontsize="x-large")
     m = 0
     tmp = []
     RMS_list = []
     for i in range(field_plot_length):
-        tmp.append(__np__.asarray([[],[]]))
+        tmp.append(np.asarray([[],[]]))
     for wave_num in wave_plot:
         n = field_plot_length
         p = 0
         for field_num in field_plot:
-            __plt__.subplot(field_plot_length, 1, n)
+            plt.subplot(field_plot_length, 1, n)
             xy_list = spotdiamgram_field_wave(Lens,field_num,wave_num)
-            __plt__.scatter(xy_list[0],xy_list[1],marker=marker_list[m],\
+            plt.scatter(xy_list[0],xy_list[1],marker=marker_list[m],\
                                          edgecolors=c_list[m],alpha=0.5,facecolors='none')
-            tmp[p] = __np__.concatenate((tmp[p],xy_list),1)
+            tmp[p] = np.concatenate((tmp[p],xy_list),1)
             p = p + 1
             n = n - 1
         m = m + 1
@@ -50,8 +50,8 @@ def spotdiagram(Lens,field_plot,wave_plot,n=12,grid_type='grid'):
     n = field_plot_length
     m = 0
     for field_num in field_plot:
-        __plt__.subplot(field_plot_length, 1, n)
-        ax = __plt__.gca()
+        plt.subplot(field_plot_length, 1, n)
+        ax = plt.gca()
 
         Relative_field = str(round(Lens.field_angle_list[field_num-1]/Lens.field_angle_list[-1],2))
         str_angle = str(Lens.field_angle_list[field_num-1]) + ' DG'
@@ -63,7 +63,7 @@ def spotdiagram(Lens,field_plot,wave_plot,n=12,grid_type='grid'):
         n = n - 1
         m = m + 1
 
-    __plt__.show()
+    plt.show()
     return 0
 
 def spotdiamgram_field_wave(Lens,field_num,wave_num):
@@ -73,8 +73,8 @@ def spotdiamgram_field_wave(Lens,field_num,wave_num):
     xy_list = []
     for ray_dict in rays_dict:
         xy_list.append([ray_dict['X'][n],ray_dict['Y'][n]])
-    xy_list = __np__.asarray(xy_list)
-    xy_list = __np__.transpose(xy_list)
+    xy_list = np.asarray(xy_list)
+    xy_list = np.transpose(xy_list)
     return xy_list
 
 def Ray_fan(Lens,field_plot,wave_plot):
@@ -86,32 +86,32 @@ def Ray_fan(Lens,field_plot,wave_plot):
     field_plot_length = len(field_plot)
     wave_plot_length = len(wave_plot)
     c_list = ['b','g','r','c','m','y','k','w']
-    fig = __plt__.figure(5,figsize=(10, 9), dpi=80)
+    fig = plt.figure(5,figsize=(10, 9), dpi=80)
     fig.canvas.set_window_title('Ray aberration')
     fig.suptitle("Ray aberration: "+Lens.lens_name, fontsize="x-large")
     m = 0
-    Py = __np__.linspace(-1,1,25)
-    Px = __np__.linspace(0,1,20)
+    Py = np.linspace(-1,1,25)
+    Px = np.linspace(0,1,20)
     max_E = 0
     for wave_num in wave_plot:
         n = field_plot_length
         for field_num in field_plot:
             #plot y fan
-            __plt__.subplot(field_plot_length, 2, n*2-1)
+            plt.subplot(field_plot_length, 2, n*2-1)
             xy_list = Y_fan_field_wave(Lens,field_num,wave_num)
             Ey = xy_list[1]-xy_list[1][12]
-            __plt__.plot(Py,Ey,c=c_list[m])
+            plt.plot(Py,Ey,c=c_list[m])
             max_tmp = max(abs(Ey))
             if max_tmp > max_E:
                 max_E = max_tmp
             #plot x fan
-            __plt__.subplot(field_plot_length, 2, n*2)
+            plt.subplot(field_plot_length, 2, n*2)
             xy_list = X_fan_field_wave(Lens,field_num,wave_num)
             Ex = xy_list[0]-xy_list[0][0]
             max_tmp = max(abs(Ex))
             if max_tmp > max_E:
                 max_E = max_tmp
-            __plt__.plot(Px,Ex,c=c_list[m])
+            plt.plot(Px,Ex,c=c_list[m])
             n = n - 1
         m = m + 1
 
@@ -119,14 +119,14 @@ def Ray_fan(Lens,field_plot,wave_plot):
     n = field_plot_length
     for field_num in field_plot:
         # Y fan axis
-        __plt__.subplot(field_plot_length, 2, n*2-1)
-        ax = __plt__.gca()
+        plt.subplot(field_plot_length, 2, n*2-1)
+        ax = plt.gca()
         if n == 1:
             ax.set_title("Tangential", fontsize=16)
         ax.set_xlim([-1.1,1.1])
         ax.set_ylim([-max_E*1.1,max_E*1.1])
-        __plt__.plot([-1,1],[0,0],c='k')
-        __plt__.plot([0,0],[-max_E,max_E],c='k')
+        plt.plot([-1,1],[0,0],c='k')
+        plt.plot([0,0],[-max_E,max_E],c='k')
         ax.set_ylabel('Field '+str(field_num))
         Relative_field = str(round(Lens.field_angle_list[field_num-1]/Lens.field_angle_list[-1],2))
         str_angle = str(Lens.field_angle_list[field_num-1])+' DG'
@@ -134,17 +134,17 @@ def Ray_fan(Lens,field_plot,wave_plot):
 
         ax.annotate(label, xy=(0.7, 0.7), xycoords='axes fraction', fontsize=12)
         # X fan axis
-        __plt__.subplot(field_plot_length, 2, n*2)
-        ax = __plt__.gca()
+        plt.subplot(field_plot_length, 2, n*2)
+        ax = plt.gca()
         if n == 1:
             ax.set_title("Sagittal", fontsize=16)
         ax.set_xlim([-0.1,1.1])
         ax.set_ylim([-max_E*1.1,max_E*1.1])
-        __plt__.plot([0,1],[0,0],c='k')
-        __plt__.plot([0,0],[-max_E,max_E],c='k')
+        plt.plot([0,1],[0,0],c='k')
+        plt.plot([0,0],[-max_E,max_E],c='k')
 
         n = n - 1
-    __plt__.show()
+    plt.show()
     return 0
 
 def Y_fan(Lens,field_plot,wave_plot):
@@ -156,20 +156,20 @@ def Y_fan(Lens,field_plot,wave_plot):
     wave_plot_length = len(wave_plot)
 
     c_list = ['b','g','r','c','m','y','k','w']
-    fig = __plt__.figure(3,figsize=(5, 9), dpi=80)
+    fig = plt.figure(3,figsize=(5, 9), dpi=80)
     fig.canvas.set_window_title('Ray aberration')
     fig.suptitle("Ray aberration", fontsize="x-large")
 
     m = 0
-    Py = __np__.linspace(-1,1,25)
+    Py = np.linspace(-1,1,25)
     max_Ey = 0
     for wave_num in wave_plot:
         n = field_plot_length
         for field_num in field_plot:
-            __plt__.subplot(field_plot_length, 1, n)
+            plt.subplot(field_plot_length, 1, n)
             xy_list = Y_fan_field_wave(Lens,field_num,wave_num)
             Ey = xy_list[1]-xy_list[1][12]
-            __plt__.plot(Py,Ey,c=c_list[m])
+            plt.plot(Py,Ey,c=c_list[m])
             #xy_list[1][12] is the Ey generate by Py=0
             max_tmp = max(abs(Ey))
             if max_tmp > max_Ey:
@@ -180,15 +180,15 @@ def Y_fan(Lens,field_plot,wave_plot):
 
     n = field_plot_length
     for field_num in field_plot:
-        __plt__.subplot(field_plot_length, 1, n)
-        ax = __plt__.gca()
+        plt.subplot(field_plot_length, 1, n)
+        ax = plt.gca()
         ax.set_xlim([-1.1,1.1])
         ax.set_ylim([-max_Ey*1.1,max_Ey*1.1])
-        __plt__.plot([-1,1],[0,0],c='k')
-        __plt__.plot([0,0],[-max_Ey,max_Ey],c='k')
+        plt.plot([-1,1],[0,0],c='k')
+        plt.plot([0,0],[-max_Ey,max_Ey],c='k')
         n = n - 1
 
-    __plt__.show()
+    plt.show()
     return 0
 
 def Y_fan_field_wave(Lens,field_num,wave_num):
@@ -198,8 +198,8 @@ def Y_fan_field_wave(Lens,field_num,wave_num):
     xy_list = []
     for ray_dict in rays_dict:
         xy_list.append([ray_dict['X'][n],ray_dict['Y'][n]])
-    xy_list = __np__.asarray(xy_list)
-    xy_list = __np__.transpose(xy_list)
+    xy_list = np.asarray(xy_list)
+    xy_list = np.transpose(xy_list)
     return xy_list
 
 
@@ -212,22 +212,22 @@ def X_fan(Lens,field_plot,wave_plot):
     wave_plot_length = len(wave_plot)
 
     c_list = ['b','g','r','c','m','y','k','w']
-    fig = __plt__.figure(4,figsize=(5, 9), dpi=80)
+    fig = plt.figure(4,figsize=(5, 9), dpi=80)
     fig.canvas.set_window_title('Ray aberration')
     fig.suptitle("Ray aberration", fontsize="x-large")
     m = 0
-    Px = __np__.linspace(0,1,20)
+    Px = np.linspace(0,1,20)
     max_Ex = 0
     for wave_num in wave_plot:
         n = field_plot_length
         for field_num in field_plot:
-            __plt__.subplot(field_plot_length, 1, n)
+            plt.subplot(field_plot_length, 1, n)
             xy_list = X_fan_field_wave(Lens,field_num,wave_num)
             Ex = xy_list[0]-xy_list[0][0]
             max_tmp = max(abs(Ex))
             if max_tmp > max_Ex:
                 max_Ex = max_tmp
-            __plt__.plot(Px,Ex,c=c_list[m])
+            plt.plot(Px,Ex,c=c_list[m])
             #xy_list[0][0] is the Ex generate by Px=0
             n = n - 1
         m = m + 1
@@ -235,14 +235,14 @@ def X_fan(Lens,field_plot,wave_plot):
 
     n = field_plot_length
     for field_num in field_plot:
-        __plt__.subplot(field_plot_length, 1, n)
-        ax = __plt__.gca()
+        plt.subplot(field_plot_length, 1, n)
+        ax = plt.gca()
         ax.set_xlim([-0.1,1.1])
         ax.set_ylim([-max_Ex*1.1,max_Ex*1.1])
-        __plt__.plot([0,1],[0,0],c='k')
-        __plt__.plot([0,0],[-max_Ex,max_Ex],c='k')
+        plt.plot([0,1],[0,0],c='k')
+        plt.plot([0,0],[-max_Ex,max_Ex],c='k')
         n = n - 1
-    __plt__.show()
+    plt.show()
     return 0
 
 def X_fan_field_wave(Lens,field_num,wave_num):
@@ -252,7 +252,7 @@ def X_fan_field_wave(Lens,field_num,wave_num):
     xy_list = []
     for ray_dict in rays_dict:
         xy_list.append([ray_dict['X'][n],ray_dict['Y'][n]])
-    xy_list = __np__.asarray(xy_list)
-    xy_list = __np__.transpose(xy_list)
+    xy_list = np.asarray(xy_list)
+    xy_list = np.transpose(xy_list)
     return xy_list
 

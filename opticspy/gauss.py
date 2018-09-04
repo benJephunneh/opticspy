@@ -1,6 +1,6 @@
-import numpy as __np__
-import matplotlib.pyplot as __plt__
-from matplotlib import cm as __cm__
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm as cm
 
 def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 	"""
@@ -12,11 +12,11 @@ def gausscal(z = 1,w0 = 0.1 ,lambda1 = 0.633):
 	# w0: Beam Waist(mm)
 	# lambda1: Wavelength(um)
 	"""
-	theta = lambda1/__np__.pi/w0 # Half Angle Divergence, theta (mrad)
+	theta = lambda1/np.pi/w0 # Half Angle Divergence, theta (mrad)
 	z0 = w0/theta*1000 # Rayleigh Range, z0 (mm)
-	wz = w0*__np__.sqrt(1+(z/z0)**2) # Half Beam Diameter, w(z) (mm)
+	wz = w0*np.sqrt(1+(z/z0)**2) # Half Beam Diameter, w(z) (mm)
 	Rz = z + z0**2/z# Radius of Curvature, R(z) (mm)
-	wR =  __np__.sqrt(2)*w0# Rayleigh Half Diameter, wz(b/2)
+	wR =  np.sqrt(2)*w0# Rayleigh Half Diameter, wz(b/2)
 	list1 = [z,w0,lambda1,wz,Rz,z0,wR,theta]
 	list3 = []
 	for i in list1:
@@ -58,20 +58,20 @@ def gaussbeam(w0 = 1,P = 5,z0 = 5, z = 10):
     gaussbeam matrix
 
     """
-	x1 = __np__.linspace(-4,4,100)
-	y1 = __np__.linspace(-4,4,100)
-	[x,y] = __np__.meshgrid(x1,y1)
-	wz = w0*__np__.sqrt(1+(z/z0)**2)
-	I = 2*P/__np__.pi/(wz**2)*__np__.exp(-2*(x**2+y**2)/(wz**2))
-	fig = __plt__.figure(figsize=(12, 8), dpi=80)
+	x1 = np.linspace(-4,4,100)
+	y1 = np.linspace(-4,4,100)
+	[x,y] = np.meshgrid(x1,y1)
+	wz = w0*np.sqrt(1+(z/z0)**2)
+	I = 2*P/np.pi/(wz**2)*np.exp(-2*(x**2+y**2)/(wz**2))
+	fig = plt.figure(figsize=(12, 8), dpi=80)
 	ax = fig.gca(projection='3d')
-	surf = ax.plot_surface(x, y, I, rstride=1, cstride=1, cmap=__cm__.RdYlGn,
+	surf = ax.plot_surface(x, y, I, rstride=1, cstride=1, cmap=cm.RdYlGn,
 		        linewidth=0, antialiased=False, alpha = 0.6)
-	__plt__.title('Gaussian Beam Intensity Distribution',fontsize=18)
+	plt.title('Gaussian Beam Intensity Distribution',fontsize=18)
 	label_1 = "Beam Waist = " + str(w0) + "\n" +\
 			  "Total Power = " + str(P) + "\n" +\
 			  "Rayleigh Range = " + str(z0) + "\n" +\
 			  "Axial Distance = " + str(z)
 	ax.text2D(0.02, 0.01, label_1, transform=ax.transAxes,fontsize=14)
-	__plt__.show()
+	plt.show()
 	return I

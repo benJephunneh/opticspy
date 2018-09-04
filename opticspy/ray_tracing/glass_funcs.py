@@ -1,8 +1,9 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 import os
-from . glass_function.refractiveIndex import *
+#from . glass_function.refractiveIndex import *
+import glass_function.refractiveindex
 
 
 # glass related functions

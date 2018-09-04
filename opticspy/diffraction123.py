@@ -1,7 +1,7 @@
-import numpy as __np__
-from numpy import sin as __sin__
-from numpy import cos as __cos__
-import matplotlib.pyplot as __plt__
+import numpy as np
+from numpy import sin as sin
+from numpy import cos as cos
+import matplotlib.pyplot as plt
 
 def doubleslit(b=0.1,a=0.4,lambda_1=632,z=0.5):
     """
@@ -14,23 +14,23 @@ def doubleslit(b=0.1,a=0.4,lambda_1=632,z=0.5):
     z: slit-to-screen distance in m.
     """
     lambda_1 = float(lambda_1)
-    theta = __np__.linspace(-0.04,0.04,1000)
-    theta1 = __np__.ones(100)
-    [theta,theta1] = __np__.meshgrid(theta,theta1)
-    beta = __np__.pi*(b/1000)/(lambda_1/(10**9))*__sin__(theta)
-    alpha = __np__.pi*(a/1000)/(lambda_1/(10**9))*__sin__(theta)
-    y = 4*(__sin__(beta)**2/(beta**2)*__cos__(alpha)**2)
-    fig = __plt__.figure(1,figsize=(12,8), dpi=80)
-    __plt__.imshow(-y)
-    __plt__.set_cmap('Greys')
-    __plt__.show()
+    theta = np.linspace(-0.04,0.04,1000)
+    theta1 = np.ones(100)
+    [theta,theta1] = np.meshgrid(theta,theta1)
+    beta = np.pi*(b/1000)/(lambda_1/(10**9))*sin(theta)
+    alpha = np.pi*(a/1000)/(lambda_1/(10**9))*sin(theta)
+    y = 4*(sin(beta)**2/(beta**2)*cos(alpha)**2)
+    fig = plt.figure(1,figsize=(12,8), dpi=80)
+    plt.imshow(-y)
+    plt.set_cmap('Greys')
+    plt.show()
     
-    theta = __np__.linspace(-0.04,0.04,1000)
-    beta = __np__.pi*(b/1000)/(lambda_1/(10**9))*__sin__(theta)
-    alpha = __np__.pi*(a/1000)/(lambda_1/(10**9))*__sin__(theta)
-    y = 4*(__sin__(beta)**2/(beta**2)*__cos__(alpha)**2)
-    y1 = 4*__sin__(beta)**2/(beta**2)
-    fig = __plt__.figure(2,figsize=(12, 8), dpi=80)
-    __plt__.plot(theta*z*1000,y)
-    __plt__.plot(theta*z*1000,y1,"g--")
-    __plt__.show()
+    theta = np.linspace(-0.04,0.04,1000)
+    beta = np.pi*(b/1000)/(lambda_1/(10**9))*sin(theta)
+    alpha = np.pi*(a/1000)/(lambda_1/(10**9))*sin(theta)
+    y = 4*(sin(beta)**2/(beta**2)*cos(alpha)**2)
+    y1 = 4*sin(beta)**2/(beta**2)
+    fig = plt.figure(2,figsize=(12, 8), dpi=80)
+    plt.plot(theta*z*1000,y)
+    plt.plot(theta*z*1000,y1,"g--")
+    plt.show()

@@ -1,38 +1,38 @@
-import numpy as __np__
-import matplotlib.pyplot as __plt__
-from matplotlib import cm as __cm__
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm as cm
 
-def __apershow__(obj, extent):
+def apershow(obj, extent):
 	if extent != 0:
 		obj = -abs(obj)
-		__plt__.imshow(obj, extent = [-extent/2,extent/2,-extent/2,extent/2])
-		__plt__.set_cmap('Greys')
-		__plt__.show()
+		plt.imshow(obj, extent = [-extent/2,extent/2,-extent/2,extent/2])
+		plt.set_cmap('Greys')
+		plt.show()
 	else:
 		obj = -abs(obj)
-		__plt__.imshow(obj)
-		__plt__.set_cmap('Greys')
-		__plt__.show()
+		plt.imshow(obj)
+		plt.set_cmap('Greys')
+		plt.show()
 
 def makecircle(a, r, PR):
 	max = a.max()
-	size = __np__.sqrt(a.size)
+	size = np.sqrt(a.size)
 	for i in range(int(size)):
 		for j in range(int(size)):
-			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
+			if np.sqrt(r[i]**2+r[j]**2) > PR:
 				a[i,j] = max
 def makecircle_boundary(a,r,PR,value):
-	size = __np__.sqrt(a.size)
+	size = np.sqrt(a.size)
 	for i in range(int(size)):
 		for j in range(int(size)):
-			if __np__.sqrt(r[i]**2+r[j]**2) > PR:
+			if np.sqrt(r[i]**2+r[j]**2) > PR:
 				a[i,j] = value
 
 def circle_aperture(n):
-	aperture = __np__.zeros([n,n])
+	aperture = np.zeros([n,n])
 	for i in range(n):
 		for j in range(n):
-			r = __np__.sqrt((i-n/2)**2+(j-n/2)**2)
+			r = np.sqrt((i-n/2)**2+(j-n/2)**2)
 			if r < n/2:
 				aperture[i,j] = 1
 	return aperture
@@ -41,7 +41,7 @@ def peak2valley(Z):
 	return Z.max()-Z.min()
 
 def rms(Z):
-	rms = __np__.sqrt(__np__.mean(__np__.square(Z)))
+	rms = np.sqrt(np.mean(np.square(Z)))
 	return rms
 
 
@@ -80,17 +80,17 @@ def phase_shift_figure(I,PR,type):
 	Draw PSI Interferograms, several types.
 	"""
 	if type == "4-step":
-		f, axarr = __plt__.subplots(2, 2, figsize=(9, 9), dpi=80)
-		axarr[0, 0].imshow(-I[0], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		f, axarr = plt.subplots(2, 2, figsize=(9, 9), dpi=80)
+		axarr[0, 0].imshow(-I[0], extent=[-PR,PR,-PR,PR],cmap=cm.Greys)
 		axarr[0, 0].set_title(r'$Phase\ shift: 0$',fontsize=16)
-		axarr[0, 1].imshow(-I[1], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[0, 1].imshow(-I[1], extent=[-PR,PR,-PR,PR],cmap=cm.Greys)
 		axarr[0, 1].set_title(r'$Phase\ shift: 1/2\pi$',fontsize=16)
-		axarr[1, 0].imshow(-I[2], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 0].imshow(-I[2], extent=[-PR,PR,-PR,PR],cmap=cm.Greys)
 		axarr[1, 0].set_title(r'$Phase\ shift: \pi$',fontsize=16)
-		axarr[1, 1].imshow(-I[3], extent=[-PR,PR,-PR,PR],cmap=__cm__.Greys)
+		axarr[1, 1].imshow(-I[3], extent=[-PR,PR,-PR,PR],cmap=cm.Greys)
 		axarr[1, 1].set_title(r'$Phase\ shift: 3/2\pi$',fontsize=16)
-		__plt__.suptitle('4-step Phase Shift Interferograms',fontsize=16)
-		__plt__.show()
+		plt.suptitle('4-step Phase Shift Interferograms',fontsize=16)
+		plt.show()
 	else:
 		print("No this type of figure")
 

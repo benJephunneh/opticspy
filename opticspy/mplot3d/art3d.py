@@ -92,7 +92,7 @@ class Text3D(mtext.Text):
 
 def text_2d_to_3d(obj, z=0, zdir='z'):
     """Convert a Text to a Text3D object."""
-    obj.__class__ = Text3D
+    obj.__class__ = Text3D # dunder method because he wants to use distinguish between Python vocab?
     obj.set_3d_properties(z, zdir)
 
 class Line3D(lines.Line2D):

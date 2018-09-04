@@ -1,6 +1,6 @@
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Ray Class
 
@@ -10,8 +10,8 @@ class Ray(object):
         Pos: ray position
         KLM: ray direction
         '''
-        self.Pos = __np__.asarray(Pos)
-        self.KLM = __np__.asarray(KLM)
+        self.Pos = np.asarray(Pos)
+        self.KLM = np.asarray(KLM)
     def list(self):
         print("Ray Position :",self.Pos)
         print("Ray Direction:",self.KLM)
@@ -42,11 +42,11 @@ def grid2rays(Lens,grid_list,angle):
     EPD = Lens.EPD
     EP = Lens.EP_thickness
     field_rays_list = []
-    l = __np__.sin(angle/180*__np__.pi)
-    m = __np__.cos(angle/180*__np__.pi)
+    l = np.sin(angle/180*np.pi)
+    m = np.cos(angle/180*np.pi)
     KLM = [0,l,m]
     Pos_z = Lens.surface_list[0].thickness
-    Pos_y = -(Pos_z + EP)*__np__.tan(angle/180*__np__.pi)
+    Pos_y = -(Pos_z + EP)*np.tan(angle/180*np.pi)
     for relative_ray in grid_list:
         x = EPD/2 * relative_ray[0]
         y = EPD/2 * relative_ray[1] + Pos_y
@@ -72,7 +72,7 @@ def grid_generator(n,grid_type,output = False):
     '''
     grid_list = []
     if grid_type == 'grid':
-        x1 = y1 = __np__.linspace(-1,1,n)
+        x1 = y1 = np.linspace(-1,1,n)
         for x in x1:
             for y in y1:
                 if x**2 + y**2 <= 1:
@@ -80,32 +80,32 @@ def grid_generator(n,grid_type,output = False):
     elif grid_type == 'circular':
         for i in range(n):
             i = i + 1
-            theta = __np__.linspace(0,360-360/i/6,i*6)
+            theta = np.linspace(0,360-360/i/6,i*6)
             r = 1/n*i
             for theta_1 in theta:
-                x = r * __np__.cos(theta_1*__np__.pi/180)
-                y = r * __np__.sin(theta_1*__np__.pi/180)
+                x = r * np.cos(theta_1*np.pi/180)
+                y = r * np.sin(theta_1*np.pi/180)
                 grid_list.append([x,y])
 
     elif grid_type == 'random':
-        r = __np__.sqrt(__np__.random.rand(n))    #sqrt(random(0--r^2)) get radius
-        theta = 2*__np__.pi*__np__.random.rand(n)  # random(0--2pi) get theta
+        r = np.sqrt(np.random.rand(n))    #sqrt(random(0--r^2)) get radius
+        theta = 2*np.pi*np.random.rand(n)  # random(0--2pi) get theta
         for r_1,theta_1 in zip(r,theta):
-            x = r_1 * __np__.cos(theta_1)
-            y = r_1 * __np__.sin(theta_1)
+            x = r_1 * np.cos(theta_1)
+            y = r_1 * np.sin(theta_1)
             grid_list.append([x,y])
     else:
         print('No this kind of grid!')
     if output == True:
-        fig = __plt__.figure(1,figsize = (5,5))
-        ax = __plt__.gca()
+        fig = plt.figure(1,figsize = (5,5))
+        ax = plt.gca()
         ax.plot(*zip(*grid_list), marker='o', color='r', ls='')
-        circle1 = __plt__.Circle((0,0),1,fill=False)
+        circle1 = plt.Circle((0,0),1,fill=False)
         fig.gca().add_artist(circle1)
         ax.set_xlim([-1,1])
         ax.set_ylim([-1,1])
         ax.set_title('Entrance Pupil Sampling')
-        __plt__.show()
+        plt.show()
         return 0
     else:
         return grid_list
@@ -115,7 +115,7 @@ def grid_generator(n,grid_type,output = False):
 def Y_fan_rays_generator(Lens,n,angle):
     grid_list = []
     x = [0]*n
-    y = __np__.linspace(-1,1,n)
+    y = np.linspace(-1,1,n)
     for x1,y1 in zip(x,y):
         grid_list.append([x1,y1])
     field_rays_list = grid2rays(Lens,grid_list,angle)
@@ -124,7 +124,7 @@ def Y_fan_rays_generator(Lens,n,angle):
 
 def X_fan_rays_generator(Lens,n,angle):
     grid_list = []
-    x = __np__.linspace(0,1,n)
+    x = np.linspace(0,1,n)
     y = [0]*n
     for x1,y1 in zip(x,y):
         grid_list.append([x1,y1])

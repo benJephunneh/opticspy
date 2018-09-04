@@ -1,7 +1,7 @@
 # first order tools, find EPD, calculate system power, etc
-from __future__ import division as __division__
-import numpy as __np__
-import matplotlib.pyplot as __plt__
+from __future__ import division as division
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def start_end(Lens,start_surface,end_surface):
@@ -23,13 +23,13 @@ def T(t,n):
 	'''
 	T matrix generate
 	'''
-	return __np__.array([[1,t/n],[0,1]])
+	return np.array([[1,t/n],[0,1]])
 
 def R(c,n_left,n_right):
 	'''
 	R matrix generate
 	'''
-	return __np__.array([[1,0],[-c*(n_right-n_left),1]])
+	return np.array([[1,0],[-c*(n_right-n_left),1]])
 
 def ABCD(matrix_list):
 	'''
@@ -39,7 +39,7 @@ def ABCD(matrix_list):
 	'''
 	M = matrix_list.pop()
 	while matrix_list:
-		M = __np__.dot(M,matrix_list.pop())
+		M = np.dot(M,matrix_list.pop())
 	return M[0,0],M[0,1],M[1,0],M[1,1]
 
 def ABCD_start_end(Lens,start_surface=0,end_surface=0):
