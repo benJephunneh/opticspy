@@ -46,7 +46,7 @@ for p,q in zip(Pn1,KLM):
 	y.append(xyz_tmp[1])
 	z.append(xyz_tmp[2])
 	
-print xyz_list
+print(xyz_list)
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(x, z, y)
