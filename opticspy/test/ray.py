@@ -89,7 +89,7 @@ for p,q in zip(xyz_list,KLM1):
 	y2.append(xyz_tmp[1])
 	z2.append(xyz_tmp[2])
 	
-print xyz_list2
+print(xyz_list2)
 fig = plt.figure()
 plt.plot(x2,y2,'b*')
 plt.show()
