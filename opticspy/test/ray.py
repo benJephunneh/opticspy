@@ -66,7 +66,7 @@ for i,j,k in zip(xyz_list,KLM,cosI):
 	Mp = (n*j[2] - c*sigma*i[2] + sigma)/npp
 	KLM1.append([Kp,Lp,Mp]) 
 
-print KLM1	
+print(KLM1)
 
 
 
